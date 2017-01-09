@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div ng-controller="HelloController">
+      {{ hello }}
+      {{ message }}
+      <button type="button" name="button" ng-click="toChildren()">Broadcast</button>
+      <div ng-controller="ByController">
+        {{ bye }}
+        {{ message }}
+        <button type="button" name="button" ng-click="toParent()">Emit</button>
+      </div>
+    </div>
+    <script src="/public/libs/angular.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/public/app/app.module.js">
+
+    </script>
+  </body>
+</html>
