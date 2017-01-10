@@ -29,9 +29,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="sentence in sentences | orderBy:sorter:(sorterType == 1) | filter:search as result">
-            <td><input type="text" name="" value="{{ sentence.word }}" ng-model="sentence.word"></td>
-            <td><input type="text" name="" value="{{ sentence.response }}" ng-model="sentence.response"></td>
+          <tr ng-repeat="sentence in sentencesTable">
+            <td><input type="text" name="" value="{{ sentences[$index].word }}" ng-model="sentence.word"></td>
+            <td><input type="text" name="" value="{{ sentences[$index].response }}" ng-model="sentence.response"></td>
           </tr>
           <tr ng-show="result.length == 0">
             <td colspan=2>Aucun résultat à afficher</td>
