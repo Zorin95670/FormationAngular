@@ -25,6 +25,11 @@
     $scope.$watch('search', function(){
         $scope.sentencesTable = $filter('filter')($scope.sentencesTable, $scope.search);
     });
+
+    $scope.deleteSentence = function(index){
+      $scope.sentences.splice($scope.sentences.indexOf( $scope.sentencesTable[index]), 1);
+      $scope.sentencesTable.splice(index, 1);
+    };
   };
 
 })();

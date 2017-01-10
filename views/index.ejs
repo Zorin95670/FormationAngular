@@ -26,12 +26,14 @@
           <tr>
             <th>Word</th>
             <th>Response</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="sentence in sentencesTable">
             <td><input type="text" name="" value="{{ sentences[$index].word }}" ng-model="sentence.word"></td>
             <td><input type="text" name="" value="{{ sentences[$index].response }}" ng-model="sentence.response"></td>
+            <td><button type="button" name="button" ng-click="deleteSentence($index)">delete</button></td>
           </tr>
           <tr ng-show="result.length == 0">
             <td colspan=2>Aucun résultat à afficher</td>
