@@ -1,5 +1,5 @@
 (function (){
-  angular.module('app')
+  angular.module('botApp')
   .controller('BotController', botController);
 
   function botController($scope, $filter){

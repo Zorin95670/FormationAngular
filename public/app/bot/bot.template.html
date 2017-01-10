@@ -1,0 +1,38 @@
+<div class="">
+  <select class="" name="" ng-model="sorter">
+    <option value="word">word</option>
+    <option value="response">response</option>
+  </select>
+    <select class="" name="" ng-model="sorterType">
+      <option value="0">A-Z</option>
+      <option value="1">Z-A</option>
+    </select>
+  <input type="text" name="" value="" ng-model="search">
+  <select class="" name="" ng-model="pagination" ng-change="setMaxPagination()">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+  <table>
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Response</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="sentence in sentencesTable">
+        <td><input type="text" name="" value="{{ sentences[$index].word }}" ng-model="sentence.word"></td>
+        <td><input type="text" name="" value="{{ sentences[$index].response }}" ng-model="sentence.response"></td>
+        <td><button type="button" name="button" ng-click="deleteSentence($index)">delete</button></td>
+      </tr>
+      <tr ng-show="result.length == 0">
+        <td colspan=2>Aucun résultat à afficher</td>
+      </tr>
+    </tbody>
+  </table>
+  <input type="text" name="" ng-keyup="setPagination($event)" value="{{ currentPagination }}" ng-model="currentPagination"> of {{ maxPagination }}
+</div>
