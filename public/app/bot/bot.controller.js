@@ -2,14 +2,9 @@
   angular.module('botApp')
   .controller('BotController', botController);
 
-  function botController($scope, $filter){
+  function botController($scope, $filter, SentencesFactory){
     $scope.msg = "";
-    $scope.sentences = [
-      { word: 'a', response: '1'},
-      { word: 'b', response: '2'},
-      { word: 'c', response: '3'},
-      { word: 'd', response: '4'},
-    ];
+    $scope.sentences = SentencesFactory.allSentences;
     $scope.sentencesTable = $scope.sentences;
 
     $scope.sorter = "word";
