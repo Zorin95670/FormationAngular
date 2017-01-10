@@ -34,6 +34,8 @@
     $scope.deleteSentence = function(index){
       $scope.sentences.splice($scope.sentences.indexOf( $scope.sentencesTable[index]), 1);
       $scope.sentencesTable.splice(index, 1);
+      $scope.maxPagination = Math.ceil($scope.sentences.length / $scope.pagination);
+      $scope.setPagination();
     };
 
     $scope.setMaxPagination = function(){
