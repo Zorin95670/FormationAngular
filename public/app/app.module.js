@@ -1,3 +1,3 @@
 (function (){
-  angular.module('app', ['botApp', 'ngRoute']);
+  angular.module('app', ['botApp', 'tchatApp', 'ngRoute']);
 })();

@@ -1,0 +1,29 @@
+<div class="">
+  <div class="">
+    <div class="" ng-repeat="message in messages | orderBy:date">
+        <div class="">
+          {{ message.date | date:'short' }}
+        </div>
+        <div class="">
+          {{ message.pseudo }}
+        </div>
+        <div class="">
+          <div class="" ng-repeat="msg in message.txt track by $index">
+            {{ msg }}
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="">
+    <div class="">
+      <input type="text" name="" value="{{ pseudo }}" ng-model="pseudo">
+      <button type="button" name="button" ng-click="generatePseudo()">Generate</button>
+    </div>
+    <div class="">
+      <input type="text" name="" value="{{ txt }}" ng-model="txt">
+    </div>
+    <div class="">
+      <button type="button" name="button" ng-click="add()">Send</button>
+    </div>
+  </div>
+</div>
