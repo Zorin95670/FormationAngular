@@ -12,6 +12,14 @@
       </ul>
     </div>
     <div ng-controller="BotController">
+      <select class="" name="" ng-model="sorter">
+        <option value="word">word</option>
+        <option value="response">response</option>
+      </select>
+        <select class="" name="" ng-model="sorterType">
+          <option value="0">A-Z</option>
+          <option value="1">Z-A</option>
+        </select>
       <input type="text" name="" value="" ng-model="search">
       <table>
         <thead>
@@ -21,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="sentence in sentences | filter:search as result">
+          <tr ng-repeat="sentence in sentences | orderBy:sorter:(sorterType == 1) | filter:search as result">
             <td><input type="text" name="" value="{{ sentence.word }}" ng-model="sentence.word"></td>
             <td><input type="text" name="" value="{{ sentence.response }}" ng-model="sentence.response"></td>
           </tr>
