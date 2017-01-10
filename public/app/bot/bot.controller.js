@@ -17,7 +17,7 @@
     $scope.search = "";
 
     $scope.pagination = "5";
-    $scope.currentPagination = 1;
+    $scope.currentPagination = 5;
 
     $scope.maxPagination = Math.ceil($scope.sentences.length / $scope.pagination);
 
@@ -30,6 +30,19 @@
     $scope.$watch('search', function(){
         $scope.setPagination();
     });
+
+    $scope.add = function(){
+      console.log($scope.sentence);
+      if(!$scope.sentence.word || !$scope.sentence.response) return;
+
+      $scope.sentences.push($scope.sentence);
+
+      $scope.maxPagination = Math.ceil($scope.sentences.length / $scope.pagination);
+
+      $scope.setPagination();
+
+      $scope.sentence = {};
+  };
 
     $scope.deleteSentence = function(index){
       $scope.sentences.splice($scope.sentences.indexOf( $scope.sentencesTable[index]), 1);

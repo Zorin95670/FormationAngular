@@ -9,11 +9,10 @@
     </select>
   <input type="text" name="" value="" ng-model="search">
   <select class="" name="" ng-model="pagination" ng-change="setMaxPagination()">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
     <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="25">25</option>
   </select>
   <table>
     <thead>
@@ -35,4 +34,9 @@
     </tbody>
   </table>
   <input type="text" name="" ng-keyup="setPagination($event)" value="{{ currentPagination }}" ng-model="currentPagination"> of {{ maxPagination }}
+  <div class="">
+    <input type="text" name="" value="" ng-model="sentence.word">
+    <input type="text" name="" value="" ng-model="sentence.response">
+    <button type="button" name="button" ng-click="add()" ng-disabled="!(sentence.word && sentence.response)">add</button>
+  </div>
 </div>
