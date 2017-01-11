@@ -1,0 +1,2 @@
+https://github.com/johnpapa/angular-styleguide
+-> Best pratice angular

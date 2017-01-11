@@ -2,7 +2,7 @@
   angular.module('tchatApp')
   .controller('TchatController', tchatController);
 
-  function tchatController($scope, SentencesFactory, $http, TchatService){
+  function tchatController($scope, SentencesFactory, $http, TchatService, socket){
     $scope.generatePseudo = function(){
       $scope.pseudo = 'guest'+Math.floor((Math.random() * 9999) + 1);
     };
@@ -44,19 +44,26 @@
         txt: [$scope.txt]
       };
 
-      TchatService.save(message).then(function(res){
-        $scope.$apply(function(){
-          $scope.messages.push(res.data);
-        });
-      }, function(res){
-        console.log('TODO - Error save message')
-        console.log(res);
-      });
+      // TchatService.save(message).then(function(res){
+      //   $scope.$apply(function(){
+      //     $scope.messages.push(res.data);
+      //   });
+      // }, function(res){
+      //   console.log('TODO - Error save message')
+      //   console.log(res);
+      // });
+
+      socket.emit('message', message);
+      $scope.messages.push(message);
 
       botMessage(SentencesFactory.allSentences, $scope.txt, $scope.messages);
 
       $scope.txt = '';
     }
+
+    socket.on('newMessage', function (data){
+      $scope.messages.push(data);
+    });
     // $http({
     //   method: 'GET',
     //   url: '/api/tchat/find',

@@ -1,10 +1,15 @@
-var express = require('express');
+var express    = require('express');
 var bodyParser = require('body-parser');
+var http       = require('http');
+
 var app = express();
+var server = http.createServer(app);
+
+var io = require('socket.io').listen(server);
 
 var jsonParser = bodyParser.json();
 
-var server = {
+var dataServer = {
   sentences : [],
   messages  : []
 };
@@ -20,32 +25,32 @@ app.get('/', function(req, res){
 });
 
 app.get('/api/bot/find', function(req, res){
-  res.json(server.sentences);
+  res.json(dataServer.sentences);
 });
 
 app.get('/api/tchat/find', function(req, res){
   var max = parseInt(req.query.max) || 5;
-  var index = server.messages.length - max;
+  var index = dataServer.messages.length - max;
 
   if(index < 0) index = 0;
 
   res.json({
     max: max,
-    messages: server.messages.slice(index)
+    messages: dataServer.messages.slice(index)
   });
 });
 
 app.post('/api/bot/add', jsonParser, function(req, res){
   var sentence = req.body;
   sentence.id = ++curentSentenceId;
-  server.sentences.push(sentence);
+  dataServer.sentences.push(sentence);
   res.json(sentence);
 });
 
 app.post('/api/Tchat/add', jsonParser, function(req, res){
   var message = req.body;
   message.id = ++curentMessageId;
-  server.messages.push(message);
+  dataServer.messages.push(message);
   res.json(message);
 });
 
@@ -55,11 +60,11 @@ app.post('/api/Tchat/update', jsonParser, function(req, res){
     error: true,
     message: "message unknow"
   };
-  for(var i = 0 ; i < server.messages.length ; i++){
-    if(server.messages[i].id = message.id){
-      server.messages[i]= message;
+  for(var i = 0 ; i < dataServer.messages.length ; i++){
+    if(dataServer.messages[i].id = message.id){
+      dataServer.messages[i]= message;
       response.error = false;
-      response.message: "message save";
+      response.message= "message save";
       break;
     }
   }
@@ -69,6 +74,15 @@ app.post('/api/Tchat/update', jsonParser, function(req, res){
   res.json(response);
 });
 
-app.listen(1337, function(){
+server.listen(1337, function(){
   console.log('Server running');
+});
+
+//-----------------------------//
+
+io.on('connection', function(socket){
+  socket.on('message', function(data){
+    console.log("New message : " + data);
+    socket.broadcast.emit('newMessage', data);
+  });
 });
