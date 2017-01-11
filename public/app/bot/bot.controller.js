@@ -53,7 +53,7 @@
     };
 
     $scope.setPagination = function(){
-      $scope.currentPagination = $scope.currentPagination | 1;
+      $scope.currentPagination = $scope.currentPagination || 1;
       if($scope.currentPagination > $scope.maxPagination) $scope.currentPagination = $scope.maxPagination;
       var value = $scope.currentPagination;
 
